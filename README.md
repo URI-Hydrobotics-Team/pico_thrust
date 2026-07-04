@@ -21,7 +21,7 @@ A UART to PWM bridge for controlling ESCs that is a replacement for the micropyt
 	mkdir build
 	cd build
 	cmake -DPICO_BOARD=<board> ..
-
+	make
 ### Common Board Names
 - Pico `pico`
 - Pico 2 `pico2`
