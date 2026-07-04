@@ -24,6 +24,6 @@ A UART to PWM bridge for controlling ESCs that is a replacement for the micropyt
 
 ### Common Board Names
 - Pico `pico`
-- Pico 2 'pico2'
-- Pico W 'pico_w`
-- Pico 2 W 'pico2_w`
+- Pico 2 `pico2`
+- Pico W `pico_w`
+- Pico 2 W `pico2_w`
