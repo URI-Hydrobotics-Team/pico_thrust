@@ -2,6 +2,19 @@
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 
+
+
+#define PICO_THRUST_REFRESH_RATE 50 //every * ms
+#define ESC_MAX 1900 //us
+#define ESC_MIN 1100 //us
+#define ESC_STOP 1500 //us
+#define ESC_FREQ 50 // Hz
+#define ESC_INITALIZE 1500 //us
+#define ESC_INITALIZE_TIME 2000 //ms
+
+#include "pwm.h"
+
+
 #define PWM_0 0
 #define PWM_1 2
 #define PWM_2 4
@@ -9,21 +22,17 @@
 #define PWM_4 8
 #define PWM_5 10
 
-uint32_t pwm_set_freq_duty(uint slice_num,
-		uint chan,uint32_t f, int d)
-{
-	uint32_t clock = 125000000;
-	uint32_t divider16 = clock / f / 4096 + 
-		(clock % (f * 4096) != 0);
-	if (divider16 / 16 == 0)
-		divider16 = 16;
-	uint32_t wrap = clock * 16 / divider16 / f - 1;
-	pwm_set_clkdiv_int_frac(slice_num, divider16/16,
-			divider16 & 0xF);
-	pwm_set_wrap(slice_num, wrap);
-	pwm_set_chan_level(slice_num, chan, wrap * d / 100);
-	return wrap;
+
+
+void initialize_thrusters(){
+
+
+	printf("$PT IN\n");
+
+
 }
+
+
 
 int main() {
 	//setup_default_uart();
