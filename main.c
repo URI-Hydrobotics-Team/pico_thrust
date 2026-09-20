@@ -18,19 +18,26 @@ void initialize_thrusters(){
 
 int main() {
 	//setup_default_uart();
-	stdio_init_all();
+	//stdio_init_all();
 
 
-	thruster_t tardigrade_y, tardigrade_ps;
+	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_bsh;
+
 	thruster_setup(&tardigrade_y, "Y", PWM_0);
 	thruster_init(&tardigrade_y);
-
 	thruster_set(&tardigrade_y, 1000);
 	
-	thruster_setup(&tardigrade_ps, "PS", PWM_5);
+	thruster_setup(&tardigrade_ps, "PS", PWM_1);
 	thruster_init(&tardigrade_ps);
-
 	thruster_set(&tardigrade_ps, 1200);
+
+	thruster_setup(&tardigrade_ss, "SS", PWM_2);
+	thruster_init(&tardigrade_ss);
+	thruster_set(&tardigrade_ss, 800);
+
+	thruster_setup(&tardigrade_bsh, "BSH", PWM_3);
+	thruster_init(&tardigrade_bsh);
+	thruster_set(&tardigrade_bsh, 1400);
 
 
 	

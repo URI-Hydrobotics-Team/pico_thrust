@@ -4,7 +4,7 @@
 #include "config.h"
 
 
-void thruster_setup(thruster_t *thruster, const char *id_,  unsigned int gpio_){
+void thruster_setup(thruster_t *thruster, const char *id_,  uint8_t gpio_){
 	memset(thruster->id, 0, PICO_THRUST_ID_LEN);
 	strncpy(thruster->id, id_, PICO_THRUST_ID_LEN);
 	thruster->gpio = gpio_;
@@ -26,9 +26,8 @@ void thruster_init(thruster_t *thruster){
 void thruster_set(thruster_t *thruster, float width){
 
 
-	float duty = (width / (1.0 / ESC_FREQ)) / (1000 * 10);
-
-	pwm_set_freq_duty(thruster->pwm_slice, thruster->gpio, ESC_FREQ, duty);
+	float duty = (width / (1.0 / ESC_FREQ)) / (1000 * 10);	
+	pwm_set_freq_duty(thruster->pwm_slice, pwm_gpio_to_channel(thruster->gpio), ESC_FREQ, duty);
 
 }
 

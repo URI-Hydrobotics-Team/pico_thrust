@@ -9,9 +9,9 @@
 struct thruster{
 	
 	char id[PICO_THRUST_ID_LEN];
-	unsigned int pwm_slice;
-	unsigned int gpio;	
-	unsigned int width; //microseconds
+	uint pwm_slice;
+	uint8_t gpio;	
+	uint16_t width; //microseconds
 
 };
 typedef struct thruster thruster_t;
