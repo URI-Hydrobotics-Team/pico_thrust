@@ -1,12 +1,14 @@
+#include "pico/stdlib.h"
+#include <stdio.h>
 #include "pwm.h"
+#include "config.h"
 
 
-void thruster_setup(thruster_t *thruster, const char *id_, unsigned int pwm_slice_, unsigned int gpio_){
-	memset(thruser->id, 0, PICO_THRUST_ID_LEN);
+void thruster_setup(thruster_t *thruster, const char *id_,  unsigned int gpio_){
+	memset(thruster->id, 0, PICO_THRUST_ID_LEN);
 	strncpy(thruster->id, id_, PICO_THRUST_ID_LEN);
-	thruster->pwm_slice = pwm_slice_;
-	thruster->gpio = gpio;
-	thruster-> 
+	thruster->gpio = gpio_;
+	thruster->width = 0; 
 
 
 }
@@ -14,7 +16,7 @@ void thruster_setup(thruster_t *thruster, const char *id_, unsigned int pwm_slic
 void thruster_init(thruster_t *thruster){
 	gpio_set_function(thruster->gpio, GPIO_FUNC_PWM);
 	thruster->pwm_slice = pwm_gpio_to_slice_num(thruster->gpio);
-	pwm_set_enabled(thruster_pwm_slice, true);
+	pwm_set_enabled(thruster->pwm_slice, true);
 
 	printf("Thruster %s initilized", thruster->id);
 	
@@ -29,7 +31,6 @@ void thruster_set(thruster_t *thruster, float width){
 	pwm_set_freq_duty(thruster->pwm_slice, thruster->gpio, ESC_FREQ, duty);
 
 }
-
 
 
 uint32_t pwm_set_freq_duty(uint slice_num, uint chan, uint32_t f, float d){
