@@ -25,9 +25,20 @@ void thruster_init(thruster_t *thruster){
 
 void thruster_set(thruster_t *thruster, float width){
 
-
+	thruster->width = width;
 	float duty = (width / (1.0 / ESC_FREQ)) / (1000 * 10);	
 	pwm_set_freq_duty(thruster->pwm_slice, pwm_gpio_to_channel(thruster->gpio), ESC_FREQ, duty);
+
+}
+
+
+
+void thruster_update(thruster_t *thruster){
+
+	float duty = (thruster->width / (1.0 / ESC_FREQ)) / (1000 * 10);	
+	pwm_set_freq_duty(thruster->pwm_slice, pwm_gpio_to_channel(thruster->gpio), ESC_FREQ, duty);
+
+
 
 }
 

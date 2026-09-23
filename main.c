@@ -17,11 +17,15 @@ void initialize_thrusters(){
 
 
 int main() {
-	//setup_default_uart();
-	//stdio_init_all();
+	stdio_init_all();
 
 
-	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_bsh;
+	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph; //create your thrusters
+
+	thruster_t thrusters[6] = {tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph}; //put them in a table in the order the PWM values streaming from the host
+	
+
+
 
 	thruster_setup(&tardigrade_y, "Y", PWM_0);
 	thruster_init(&tardigrade_y);
@@ -40,8 +44,10 @@ int main() {
 	thruster_set(&tardigrade_bsh, 1400);
 
 
-	
-	//pwm_set_freq_duty(pwm_slice_0, PWM_0, 50, 6); //1200 us
+
+
+
+
 
 
 
