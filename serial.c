@@ -1,7 +1,6 @@
 #include "serial.h"
 
 
-
 /*
 	serial data format from PPSTI:
 	PWM,0000,0000,0000,0000,0000,0000
@@ -12,8 +11,14 @@
 
 */
 
-void serial_write_thruster(thruster_t *thruster, const char *value);
+void serial_write_thruster(thruster_t *thruster, const char *value){
 
+	int pwm_int = atoi(value);
+	thruster->width = pwm_int;
+
+
+
+}
 
 
 int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
@@ -23,7 +28,12 @@ int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 	char temp_buffer[8]; //stores individual pwm values extracted from string
 	char buffer[SERIAL_MESSAGE_BUFFER_SIZE];
 	memset(buffer, 0, SERIAL_MESSAGE_BUFFER_SIZE);
-	gets(buffer);
+
+	if (!gets(buffer)){
+		//read from buffer
+		return -1;
+
+	}
 
 	
 	//parse	
@@ -80,8 +90,5 @@ int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 
 
 }
-
-
-
 
 
