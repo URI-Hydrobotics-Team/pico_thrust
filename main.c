@@ -5,6 +5,9 @@
 #include "config.h"
 #include "pwm.h"
 #include "serial.h"
+#include <fcntl.h>
+
+
 
 int main() {
 	stdio_init_all();
@@ -33,22 +36,26 @@ int main() {
 
 	int status;
 
+	sleep_ms(1000*5);
+
+
 	while(1){
 
 		sleep_ms(GLOBAL_DELAY);
-
+		/*
 		printf("THRUSTERS:\n");
 		for (int i = 0; i < 6; i++){
 			printf("thruster[%d] = %d\n", i, tardigrade_thrusters[i]->width);
 
 
 		}
-
+		*/
 
 
 		//read from host
-		status = serial_read_and_parse_from_host(tardigrade_thrusters, 6);
+		serial_read_and_parse_from_host(tardigrade_thrusters, 6);
 		
+	/*
 		if (status == -1){
 			//an error occured clamp to 0 IMMIDIATELY
 
@@ -58,7 +65,7 @@ int main() {
 			}
 	
 		}			
-
+	*/
 		//update the thrusters
 		for (uint8_t i = 0; i < 6; i++){
 

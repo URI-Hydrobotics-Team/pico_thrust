@@ -9,7 +9,7 @@
 #define ESC_INITALIZE 1500 //us
 #define ESC_INITALIZE_TIME 2000 //ms
 #define SERIAL_MESSAGE_BUFFER_SIZE 256
-#define GLOBAL_DELAY 10 //ms
+#define GLOBAL_DELAY 1 //ms
 
 
 #define PWM_0 0
