@@ -17,6 +17,7 @@ pico_sdk_init()
 add_executable(pico_thrust
 	main.c
 	pwm.c
+	serial.c
 )
 
 # pull in common dependencies

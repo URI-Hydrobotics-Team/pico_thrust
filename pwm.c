@@ -10,6 +10,7 @@ void thruster_setup(thruster_t *thruster, const char *id_,  uint8_t gpio_){
 	thruster->gpio = gpio_;
 	thruster->width = 0; 
 
+	
 
 }
 
@@ -18,7 +19,6 @@ void thruster_init(thruster_t *thruster){
 	thruster->pwm_slice = pwm_gpio_to_slice_num(thruster->gpio);
 	pwm_set_enabled(thruster->pwm_slice, true);
 
-	printf("Thruster %s initilized", thruster->id);
 	
 
 }

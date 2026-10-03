@@ -9,10 +9,9 @@
 int main() {
 	stdio_init_all();
 
-
 	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph; //create your thrusters
 
-	thruster_t tardigrade_thrusters[6] = {tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph}; //put them in a table in the order the PWM values streaming from the host
+	thruster_t *tardigrade_thrusters[6] = {&tardigrade_y, &tardigrade_ps, &tardigrade_ss, &tardigrade_sh, &tardigrade_bsh, &tardigrade_bph}; //put them in a table in the order the PWM values streaming from the host
 	
 
 	thruster_setup(&tardigrade_y, "Y", PWM_0);
@@ -25,8 +24,8 @@ int main() {
 
 
 	for (uint8_t i = 0; i < 6; i++){
-		thruster_init(tardigrade_thrusters[i]);
-		thruster_set(tardigrade_thrusters[i], ESC_INITALIZE);
+		thruster_init((tardigrade_thrusters[i]));
+		thruster_set((tardigrade_thrusters[i]), ESC_INITALIZE);
 	
 	}
 
@@ -38,8 +37,17 @@ int main() {
 
 		sleep_ms(GLOBAL_DELAY);
 
+		printf("THRUSTERS:\n");
+		for (int i = 0; i < 6; i++){
+			printf("thruster[%d] = %d\n", i, tardigrade_thrusters[i]->width);
+
+
+		}
+
+
+
 		//read from host
-		status = serial_read_and_parse_from_host(&tardigrade_thrusters, 6);
+		status = serial_read_and_parse_from_host(tardigrade_thrusters, 6);
 		
 		if (status == -1){
 			//an error occured clamp to 0 IMMIDIATELY
@@ -51,14 +59,12 @@ int main() {
 	
 		}			
 
-		}
 		//update the thrusters
 		for (uint8_t i = 0; i < 6; i++){
 
 			thruster_update(tardigrade_thrusters[i]);
 		}
 	
-
 
 	
 	}

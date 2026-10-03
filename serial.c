@@ -1,5 +1,6 @@
 #include "serial.h"
-
+#include "config.h"
+#include <stdlib.h>
 
 /*
 	serial data format from PPSTI:
@@ -41,7 +42,7 @@ int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 	memset(temp_buffer, 0, 8);
 	uint8_t temp_buffer_index = 0;
 	int buffer_index = 0;
-	
+	uint8_t thruster_index = 0;	
 
 
 	if (strncpy(buffer, "PWM", 3) != 0){
@@ -64,7 +65,7 @@ int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 			memset(temp_buffer, 0, 8);
 			temp_buffer_index = 0;
 
-				
+			thruster_index++;
 		}else{
 			temp_buffer[temp_buffer_index] = buffer[buffer_index];
 			temp_buffer_index++;
@@ -84,11 +85,4 @@ int serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 	}
 	
 
-
-
-	
-
-
 }
-
-
