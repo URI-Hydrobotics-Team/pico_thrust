@@ -12,11 +12,11 @@
 #define GLOBAL_DELAY 1 //ms
 
 
-#define PWM_0 0
-#define PWM_1 2
-#define PWM_2 4
+#define PWM_0 4
+#define PWM_1 0
+#define PWM_2 8
 #define PWM_3 6
-#define PWM_4 8
-#define PWM_5 10
+#define PWM_4 10
+#define PWM_5 2
 
 #endif

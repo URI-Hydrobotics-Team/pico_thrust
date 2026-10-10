@@ -14,15 +14,16 @@ int main() {
 
 	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph; //create your thrusters
 
-	thruster_t *tardigrade_thrusters[6] = {&tardigrade_y, &tardigrade_ps, &tardigrade_ss, &tardigrade_sh, &tardigrade_bsh, &tardigrade_bph}; //put them in a table in the order the PWM values streaming from the host
+	thruster_t *tardigrade_thrusters[6] = {&tardigrade_bsh, &tardigrade_bsh, &tardigrade_sh, &tardigrade_y, &tardigrade_ps, &tardigrade_ss}; //put them in a table in the order the PWM values streaming from the host
 	
 
-	thruster_setup(&tardigrade_y, "Y", PWM_0);
-	thruster_setup(&tardigrade_ps, "PS", PWM_1);
-	thruster_setup(&tardigrade_ss, "SS", PWM_2);
-	thruster_setup(&tardigrade_bsh, "BSH", PWM_3);
-	thruster_setup(&tardigrade_sh, "SH", PWM_4);
-	thruster_setup(&tardigrade_bph, "BPH", PWM_5);
+
+	thruster_setup(&tardigrade_bph, "BPH", PWM_0);
+	thruster_setup(&tardigrade_bsh, "BSH", PWM_1);
+	thruster_setup(&tardigrade_sh, "SH", PWM_2);
+	thruster_setup(&tardigrade_y, "Y", PWM_3);
+	thruster_setup(&tardigrade_ps, "PS", PWM_4);
+	thruster_setup(&tardigrade_ss, "SS", PWM_5);
 
 
 
@@ -34,14 +35,11 @@ int main() {
 
 	sleep_ms(ESC_INITALIZE_TIME);
 
-	int status;
-
-	sleep_ms(1000*5);
-
+	//int status;
 
 	while(1){
 
-		sleep_ms(GLOBAL_DELAY);
+		//sleep_ms(GLOBAL_DELAY);
 		/*
 		printf("THRUSTERS:\n");
 		for (int i = 0; i < 6; i++){
