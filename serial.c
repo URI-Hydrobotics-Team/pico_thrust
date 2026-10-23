@@ -22,7 +22,7 @@ void serial_write_thruster(thruster_t *thruster, const char *value){
 }
 
 
-void serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
+void serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count, int* status){
 
 	//read
 
@@ -34,11 +34,12 @@ void serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count){
 	buffer_status = stdio_get_until(buffer, SERIAL_MESSAGE_BUFFER_SIZE, 0);
 
 
-	if (buffer_status != PICO_ERROR_TIMEOUT){
-		
+	if (buffer_status != PICO_ERROR_TIMEOUT){	
 		printf("buffer: %s\n", buffer);
-
-	}
+                *status = 1;
+	}else{
+            *status = -1;
+        }
 	//parse	
 
 	memset(temp_buffer, 0, 8);
