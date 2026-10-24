@@ -6,7 +6,7 @@
 #include "pwm.h"
 #include "serial.h"
 #include <fcntl.h>
-THRUST_TIMEOUT = 500 //ms
+#define THRUST_TIMEOUT 500 //ms
 
 int main() {
 	stdio_init_all();
@@ -42,11 +42,11 @@ int main() {
 	        serial_read_and_parse_from_host(tardigrade_thrusters, 6, &status);
 	
                 if(status != -1){
-                    errTime = timer_time_us_32(timer); 
+                    errTime = timer_time_us_32(&timer); 
                 }else{
-                    if(timer_time_us_32(timer) - errTime >= THRUST_TIMEOUT){
+                    if(timer_time_us_32(&timer) - errTime >= THRUST_TIMEOUT){
 		        for (uint8_t i = 0; i < 6; i++){
-			    thruster_set(tardigrade_thrusters[i],ESC_INITIALIZE);
+			    thruster_set(tardigrade_thrusters[i],ESC_INITALIZE);
 		        }
                     }
                 }
