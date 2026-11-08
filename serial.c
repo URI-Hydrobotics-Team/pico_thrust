@@ -11,7 +11,7 @@
 
 
 */
-
+#define BUFFER_STATUS_TIME 500 //ms of time before stdio_get_until errors tf out
 void serial_write_thruster(thruster_t *thruster, const char *value){
 
 	int pwm_int = atoi(value);
@@ -31,7 +31,8 @@ void serial_read_and_parse_from_host(thruster_t **thrusters, uint8_t count, int*
 	memset(buffer, 0, SERIAL_MESSAGE_BUFFER_SIZE);
 
 	int buffer_status;
-	buffer_status = stdio_get_until(buffer, SERIAL_MESSAGE_BUFFER_SIZE, 0);
+        uint32_t timeout = BUFFER_STATUS_TIME;
+	buffer_status = stdio_get_until(buffer,SERIAL_MESSAGE_BUFFER_SIZE, make_timeout_time_ms(timeout));
 
 
 	if (buffer_status != PICO_ERROR_TIMEOUT){	

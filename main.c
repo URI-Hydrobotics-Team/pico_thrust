@@ -10,8 +10,6 @@
 
 int main() {
 	stdio_init_all();
-        timer_hw_t timer;
-        uint32_t errTime;
 
         int status = 0;
 	thruster_t tardigrade_y, tardigrade_ps, tardigrade_ss, tardigrade_sh, tardigrade_bsh, tardigrade_bph; //create your thrusters
@@ -41,16 +39,12 @@ int main() {
 	        //read from host
 	        serial_read_and_parse_from_host(tardigrade_thrusters, 6, &status);
 	
-                if(status != -1){
-                    errTime = timer_time_us_32(&timer); 
-                }else{
-                    if(timer_time_us_32(&timer) - errTime >= THRUST_TIMEOUT){
-		        for (uint8_t i = 0; i < 6; i++){
-			    thruster_set(tardigrade_thrusters[i],ESC_INITALIZE);
-		        }
-                    }
+                if(status == -1){
+	            for (uint8_t i = 0; i < 6; i++){
+	    	    thruster_set(tardigrade_thrusters[i],ESC_INITALIZE);
+		    }
                 }
-
+                
 	        //update the thrusters
 	        for (uint8_t i = 0; i < 6; i++){
 		    thruster_update(tardigrade_thrusters[i]);
